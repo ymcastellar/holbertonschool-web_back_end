@@ -40,9 +40,9 @@ class Server:
         start, end = index_range(page, page_size)
         return self.dataset()[start:end]
 
-    def get_hyper (self, page: int = 1, page_size: int = 10) -> List[List]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
         """return pagination info"""
-        
+
         total_pages = math.ceil(len(self.dataset()) / page_size)
         return {
             'page_size': page_size if page < total_pages else 0,
