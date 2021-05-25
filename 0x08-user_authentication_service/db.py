@@ -13,7 +13,7 @@ class DB:
     """
     DB class
     """
-    
+
     def __init__(self):
         """
         Initialize DB
