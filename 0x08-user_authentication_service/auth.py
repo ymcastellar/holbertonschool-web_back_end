@@ -2,9 +2,9 @@
 """  Hash password """
 
 
-import bcrypt
 from db import DB
 from user import User
+import bcrypt
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -21,9 +21,7 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """
-        Register a new user if email is new
-        """
+        """  Register a new user  """
         try:
             if self._db.find_user_by(email=email):
                 raise ValueError('User {} already exists'.format(email))
