@@ -2,7 +2,7 @@
 """
 SQLAlchemy model User
 """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
 app = Flask(__name__)
@@ -18,14 +18,7 @@ def hello():
 
 @app.route('/users', methods=['POST'])
 def register():
-    """ POST /users
-    JSON body:
-      - email
-      - password
-    Return:
-      - user created message if success
-      - 400 if email already registered
-    """
+    """ POST /users """
     email = request.form.get('email')
     password = request.form.get('password')
     try:
@@ -37,14 +30,7 @@ def register():
 
 @app.route('/sessions', methods=['POST'])
 def login():
-    """ POST /sessions
-    JSON body:
-      - email
-      - password
-    Return:
-      - logged in message if success
-      - 401 if login info is incorrect
-    """
+    """ POST /sessions """
     email = request.form.get('email')
     password = request.form.get('password')
     if not AUTH.valid_login(email, password):
@@ -57,13 +43,7 @@ def login():
 
 @app.route('/sessions', methods=['DELETE'])
 def logout():
-    """ DELETE /sessions
-    JSON body:
-      - session_id
-    Return:
-      - destroy session and redirect to GET /
-      - 403 if user doesn't exist
-    """
+    """ DELETE /sessions """
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if user:
@@ -75,13 +55,7 @@ def logout():
 
 @app.route('/profile', methods=['GET'])
 def profile():
-    """ GET /profile
-    JSON body:
-      - session_id
-    Return:
-      - user email
-      - 403 if user doesn't exist
-    """
+    """ GET /profile  """
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if user:
@@ -92,13 +66,7 @@ def profile():
 
 @app.route('/reset_password', methods=['POST'])
 def get_reset_password_token():
-    """ POST /reset_password
-    JSON body:
-      - email
-    Return:
-      - reset token
-      - 403 if email isn't registered
-    """
+    """ POST /reset_password  """
     try:
         email = request.form.get('email')
         reset_token = AUTH.get_reset_password_token(email)
@@ -109,15 +77,7 @@ def get_reset_password_token():
 
 @app.route('/reset_password', methods=['PUT'])
 def update_password():
-    """ PUT /reset_password
-    JSON body:
-      - email
-      - reset_token
-      - new_password
-    Return:
-      - update password
-      - 403 if token is invalid
-    """
+    """ PUT /reset_password  """
     try:
         email = request.form.get('email')
         reset_token = request.form.get('reset_token')
