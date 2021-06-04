@@ -37,21 +37,6 @@ def get_locale():
     if locale in Config.LANGUAGES:
         return locale
     return request.accept_languages.best_match(Config.LANGUAGES)
-  
-  def get_user(user):
-    """
-    Get user from request
-    """
-    if user and int(user) in users:
-        return users.get(int(user))
-
-
-@app.before_request
-def before_request():
-    """
-    Get user, if any
-    """
-    g.user = get_user(request.args.get('login_as'))
 
 
 if __name__ == "__main__":
