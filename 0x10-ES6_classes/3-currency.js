@@ -21,11 +21,11 @@ export default class Currency {
   }
 
   set name(newName) {
-    if (typeof name !== 'string') throw TypeError('student must be a String');
+    if (typeof newName !== 'string') throw TypeError('student must be a String');
     this._name = newName;
   }
 
   displayFullCurrency() {
-    return `${this.name} (${this.code})`;
+    return `${this._name} (${this._code})`;
   }
 }
