@@ -4,4 +4,5 @@ process.stdin.on('readable', () => {
   if (name) console.log(`Your name is: ${name}`);
 });
 
-if (process.stdout.isTTY) process.stdin.on('end', () => process.stdout.write('This important software is now closing\n'));
+if (process.stdout.isTTY)
+	process.stdin.on('end', () => process.stdout.write('This important software is now closing\n'));
