@@ -1,0 +1,16 @@
+{
+  "name": "0x13-unittests_in_js",
+  "version": "1.0.0",
+  "description": "## Learning Objectives At the end of this project, you are expected to be able to explain to anyone, without the help of Google:",
+  "main": "0-calcul.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.0.2"
+  }
+}
