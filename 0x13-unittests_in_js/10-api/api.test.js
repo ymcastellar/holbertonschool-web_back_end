@@ -65,12 +65,12 @@ describe('POST /login', () => {
       url: 'http://localhost:7865/login',
       method: 'POST',
       json: {
-        userName: 'Javi',
+        userName: 'Betty',
       },
     };
     request(call, (error, response, body) => {
       chai.expect(response.statusCode).to.equal(200);
-      chai.expect(body).to.equal('Welcome Javi');
+      chai.expect(body).to.equal('Welcome Betty');
       done();
     });
   });
